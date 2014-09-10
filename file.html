@@ -1,0 +1,94 @@
+<html>
+<head>
+    <title>JSCover2 Coverage Report</title>
+    <style>
+        body {
+            font-size: 10pt;
+            font-family: monospace;
+        }
+        .line {
+            display:block;
+        }
+        .hit {
+            background-color: greenyellow;
+        }
+        .miss {
+            background-color: orangered;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></td>
+        <td valign="top"><span class="line">&nbsp;</span>
+            <span class="line hit">12</span>
+            <span class="line hit">5</span>
+            <span class="line miss">5</span>
+            <span class="line hit">5</span>
+            <span class="line hit">5</span>
+            <span class="line hit">5</span>
+            <span class="line hit">5</span>
+            <span class="line hit">5</span>
+            <span class="line hit">5</span>
+            <span class="line miss">0</span>
+            <span class="line miss">0</span>
+            <span class="line miss">0</span>
+            <span class="line hit">5</span>
+            <span class="line hit">5</span>
+            <span class="line hit">5</span>
+            <span class="line hit">5</span>
+            <span class="line hit">5</span>
+            <span class="line hit">5</span>
+            <span class="line hit">5</span>
+            <span class="line">&nbsp;</span>
+        </td>
+        <td>
+<pre>
+//Comment
+function check(x) {
+    if (typeof x !== 'number' || x &lt;= 0)
+        return "invalid input";
+    var result;
+    switch (x) {
+        case 1:
+        case 2:
+            result = "one or two";
+            break;
+        case 3:
+            result = "three";
+            break;
+        case 4:
+            result = "four";
+            break;
+        default:
+            result = "unsupported";
+    }
+    return result
+}
+</pre>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
