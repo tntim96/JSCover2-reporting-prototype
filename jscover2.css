@@ -1,0 +1,39 @@
+body, pre, span {
+    font-size: 12pt;
+    font-family: monospace;
+}
+.line {
+    display:block;
+    text-align: right;
+}
+.hit {
+    background-color: greenyellow;
+}
+.miss {
+    background-color: orangered;
+}
+span.booleanMissed {
+    font-weight: bold;
+}
+span.booleanMissed:hover {
+    text-decoration: none;
+    background: red;
+    z-index: 6;
+}
+span.booleanMissed span {
+    position: absolute;
+    left: -9999px;
+    margin: 4px 0 0 0px;
+    padding: 3px 3px 3px 3px;
+    border: 1px solid black;
+    z-index: 6;
+}
+span.booleanMissed:hover span {
+    left: 2%;
+    background: #ffffff;
+}
+span.booleanMissed:hover span {
+    margin: 20px 0 0 170px;
+    background: #ffffff;
+    z-index: 6;
+}

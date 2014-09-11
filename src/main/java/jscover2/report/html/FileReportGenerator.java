@@ -31,47 +31,7 @@ public class FileReportGenerator {
     private void buildHeader(StringBuilder sb) {
         sb.append("<head>\n" +
                 "    <title>JSCover2 Coverage Report</title>\n" +
-                "    <style>\n" +
-                "        body, pre, span {\n" +
-                "            font-size: 12pt;\n" +
-                "            font-family: monospace;\n" +
-                "        }\n" +
-                "        .line {\n" +
-                "            display:block;\n" +
-                "            text-align: right;\n" +
-                "        }\n" +
-                "        .hit {\n" +
-                "            background-color: greenyellow;\n" +
-                "        }\n" +
-                "        .miss {\n" +
-                "            background-color: orangered;\n" +
-                "        }\n" +
-                "        span.booleanMissed {\n" +
-                "            font-weight: bold;\n" +
-                "        }\n" +
-                "        span.booleanMissed:hover {\n" +
-                "            text-decoration: none;\n" +
-                "            background: red;\n" +
-                "            z-index: 6;\n" +
-                "        }\n" +
-                "        span.booleanMissed span {\n" +
-                "            position: absolute;\n" +
-                "            left: -9999px;\n" +
-                "            margin: 4px 0 0 0px;\n" +
-                "            padding: 3px 3px 3px 3px;\n" +
-                "            border: 1px solid black;\n" +
-                "            z-index: 6;\n" +
-                "        }\n" +
-                "        span.booleanMissed:hover span {\n" +
-                "            left: 2%;\n" +
-                "            background: #ffffff;\n" +
-                "        }\n" +
-                "        span.booleanMissed:hover span {\n" +
-                "            margin: 20px 0 0 170px;\n" +
-                "            background: #ffffff;\n" +
-                "            z-index: 6;\n" +
-                "        }\n" +
-                "    </style>\n" +
+                "    <link rel=\"stylesheet\" href=\"jscover2.css\" type=\"text/css\"/>\n" +
                 "</head>\n");
     }
 

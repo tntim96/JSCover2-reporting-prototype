@@ -38,6 +38,7 @@ public class FileReportGeneratorTest {
 
     @Test
     public void shouldGenerateHtml() throws ScriptException, NoSuchMethodException, IOException {
+        assertThat(invocable.invokeFunction("check", -1), equalTo("invalid input"));
         assertThat(invocable.invokeFunction("check", 1), equalTo("one or two"));
         assertThat(invocable.invokeFunction("check", 2), equalTo("one or two"));
         assertThat(invocable.invokeFunction("check", 4), equalTo("four"));
