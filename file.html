@@ -1,8 +1,8 @@
 <html><head>
     <title>JSCover2 Coverage Report</title>
     <style>
-        body {
-            font-size: 10pt;
+        body, pre, span {
+            font-size: 12pt;
             font-family: monospace;
         }
         .line {
@@ -14,6 +14,31 @@
         }
         .miss {
             background-color: orangered;
+        }
+        span.booleanMissed {
+            font-weight: bold;
+        }
+        span.booleanMissed:hover {
+            text-decoration: none;
+            background: red;
+            z-index: 6;
+        }
+        span.booleanMissed span {
+            position: absolute;
+            left: -9999px;
+            margin: 4px 0 0 0px;
+            padding: 3px 3px 3px 3px;
+            border: 1px solid black;
+            z-index: 6;
+        }
+        span.booleanMissed:hover span {
+            left: 2%;
+            background: #ffffff;
+        }
+        span.booleanMissed:hover span {
+            margin: 20px 0 0 170px;
+            background: #ffffff;
+            z-index: 6;
         }
     </style>
 </head>
@@ -43,26 +68,26 @@
 21
 </pre></td>
         <td valign="top"><span class="line">&nbsp;</span>
-            <span id="line2" class="line hit">1</span>
-            <span id="line3" class="line miss booleanMissed">3</span>
-            <span id="line4" class="line miss">0</span>
-            <span id="line5" class="line hit">3</span>
-            <span id="line6" class="line hit">3</span>
-            <span id="line7" class="line hit">1</span>
-            <span id="line8" class="line hit">2</span>
-            <span id="line9" class="line hit">2</span>
-            <span id="line10" class="line hit">2</span>
-            <span id="line11" class="line miss">0</span>
-            <span id="line12" class="line miss">0</span>
-            <span id="line13" class="line miss">0</span>
-            <span id="line14" class="line hit">1</span>
-            <span id="line15" class="line hit">1</span>
-            <span id="line16" class="line hit">1</span>
-            <span id="line17" class="line miss">0</span>
-            <span id="line18" class="line miss">0</span>
-            <span class="line">&nbsp;</span>
-            <span id="line20" class="line hit">3</span>
-        </td>
+<span id="line2" class="line hit">1<span></span></span>
+<span id="line3" class="line miss booleanMissed">3<span>Missed code typeof x !== 'number' || x &lt;= 0<br/>Missed code typeof x !== 'number'<br/>Missed code x &lt;= 0<br/></span></span>
+<span id="line4" class="line miss">0<span></span></span>
+<span id="line5" class="line hit">3<span></span></span>
+<span id="line6" class="line hit">3<span></span></span>
+<span id="line7" class="line hit">1<span></span></span>
+<span id="line8" class="line hit">2<span></span></span>
+<span id="line9" class="line hit">2<span></span></span>
+<span id="line10" class="line hit">2<span></span></span>
+<span id="line11" class="line miss">0<span></span></span>
+<span id="line12" class="line miss">0<span></span></span>
+<span id="line13" class="line miss">0<span></span></span>
+<span id="line14" class="line hit">1<span></span></span>
+<span id="line15" class="line hit">1<span></span></span>
+<span id="line16" class="line hit">1<span></span></span>
+<span id="line17" class="line miss">0<span></span></span>
+<span id="line18" class="line miss">0<span></span></span>
+<span class="line">&nbsp;</span>
+<span id="line20" class="line hit">3<span></span></span>
+</td>
         <td>
 <pre>//Comment
 function check(x) {

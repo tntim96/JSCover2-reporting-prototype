@@ -1,5 +1,6 @@
 package jscover2.report.html;
 
+import jscover2.report.BooleanExpressionData;
 import jscover2.report.FileData;
 import jscover2.report.LineCompleteData;
 import jscover2.report.SourceCodeRetriever;
@@ -31,8 +32,8 @@ public class FileReportGenerator {
         sb.append("<head>\n" +
                 "    <title>JSCover2 Coverage Report</title>\n" +
                 "    <style>\n" +
-                "        body {\n" +
-                "            font-size: 10pt;\n" +
+                "        body, pre, span {\n" +
+                "            font-size: 12pt;\n" +
                 "            font-family: monospace;\n" +
                 "        }\n" +
                 "        .line {\n" +
@@ -44,6 +45,31 @@ public class FileReportGenerator {
                 "        }\n" +
                 "        .miss {\n" +
                 "            background-color: orangered;\n" +
+                "        }\n" +
+                "        span.booleanMissed {\n" +
+                "            font-weight: bold;\n" +
+                "        }\n" +
+                "        span.booleanMissed:hover {\n" +
+                "            text-decoration: none;\n" +
+                "            background: red;\n" +
+                "            z-index: 6;\n" +
+                "        }\n" +
+                "        span.booleanMissed span {\n" +
+                "            position: absolute;\n" +
+                "            left: -9999px;\n" +
+                "            margin: 4px 0 0 0px;\n" +
+                "            padding: 3px 3px 3px 3px;\n" +
+                "            border: 1px solid black;\n" +
+                "            z-index: 6;\n" +
+                "        }\n" +
+                "        span.booleanMissed:hover span {\n" +
+                "            left: 2%;\n" +
+                "            background: #ffffff;\n" +
+                "        }\n" +
+                "        span.booleanMissed:hover span {\n" +
+                "            margin: 20px 0 0 170px;\n" +
+                "            background: #ffffff;\n" +
+                "            z-index: 6;\n" +
                 "        }\n" +
                 "    </style>\n" +
                 "</head>\n");
@@ -86,8 +112,23 @@ public class FileReportGenerator {
             int lineHits = lineCompleteData.getLineHits();
             String hitClass = lineCompleteData.hit() && !lineCompleteData.isBooleanMissed() ? "hit" : "miss";
             String extraClass = lineCompleteData.isBooleanMissed() ? " booleanMissed" : "";
-            sb.append(format("<span id=\"line%d\" class=\"line %s%s\">%d</span>\n", currentLine, hitClass, extraClass, lineHits));
+            String booleanExpressionExplanation = getBooleanExpressionHtml(lineCompleteData);
+            sb.append(format("<span id=\"line%d\" class=\"line %s%s\">%d%s</span>\n", currentLine, hitClass, extraClass, lineHits, booleanExpressionExplanation));
         }
+    }
+
+    private String getBooleanExpressionHtml(LineCompleteData lineCompleteData) {
+        StringBuilder sb = new StringBuilder("<span>");
+        for (BooleanExpressionData booleanExpressionData : lineCompleteData.getBooleanExpressions()) {
+            if (!booleanExpressionData.hit()) {
+                String code = sourceCodeRetriever.getSource(booleanExpressionData.getPosition());
+                sb.append("Missed code ");
+                sb.append(StringEscapeUtils.escapeHtml4(code));
+                sb.append("<br/>");
+            }
+        }
+        sb.append("</span>");
+        return sb.toString();
     }
 
     private void addSource(StringBuilder sb) {

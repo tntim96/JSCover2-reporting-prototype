@@ -15,6 +15,7 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 import java.io.File;
+import java.io.IOException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -36,7 +37,7 @@ public class FileReportGeneratorTest {
     }
 
     @Test
-    public void shouldGenerateHtml() throws ScriptException, NoSuchMethodException {
+    public void shouldGenerateHtml() throws ScriptException, NoSuchMethodException, IOException {
         assertThat(invocable.invokeFunction("check", 1), equalTo("one or two"));
         assertThat(invocable.invokeFunction("check", 2), equalTo("one or two"));
         assertThat(invocable.invokeFunction("check", 4), equalTo("four"));
@@ -47,6 +48,6 @@ public class FileReportGeneratorTest {
 
         FileReportGenerator fileReportGeneratorReport = new FileReportGenerator("test.js", code, fileData);
         String html = fileReportGeneratorReport.generateHtml();
-        System.out.println(html);
+        FileUtils.writeStringToFile(new File("file.html"), html);
     }
 }
