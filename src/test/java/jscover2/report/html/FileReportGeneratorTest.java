@@ -38,6 +38,7 @@ public class FileReportGeneratorTest {
     @Test
     public void shouldGenerateHtml() throws ScriptException, NoSuchMethodException {
         assertThat(invocable.invokeFunction("check", 1), equalTo("one or two"));
+        assertThat(invocable.invokeFunction("check", 2), equalTo("one or two"));
         assertThat(invocable.invokeFunction("check", 4), equalTo("four"));
 
         JSCover2Data jsCover2Data = new JSCover2Data((ScriptObjectMirror) engine.eval(config.getCoverVariableName()));
