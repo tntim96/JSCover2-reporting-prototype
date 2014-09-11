@@ -118,16 +118,25 @@ public class FileReportGenerator {
     }
 
     private String getBooleanExpressionHtml(LineCompleteData lineCompleteData) {
-        StringBuilder sb = new StringBuilder("<span>");
+        StringBuilder sb = new StringBuilder("<span><table>");
         for (BooleanExpressionData booleanExpressionData : lineCompleteData.getBooleanExpressions()) {
             if (!booleanExpressionData.hit()) {
                 String code = sourceCodeRetriever.getSource(booleanExpressionData.getPosition());
-                sb.append("Missed code ");
+                sb.append("<tr><td>");
                 sb.append(StringEscapeUtils.escapeHtml4(code));
-                sb.append("<br/>");
+                sb.append("</td>");
+                sb.append("<td>");
+                if (booleanExpressionData.getTrueHits() == 0 && booleanExpressionData.getFalseHits() == 0)
+                    sb.append("Never evaluated");
+                else if (booleanExpressionData.getTrueHits() == 0)
+                    sb.append("Never evaluated to true");
+                else if (booleanExpressionData.getFalseHits() == 0)
+                    sb.append("Never evaluated to false");
+                sb.append("</td>");
+                sb.append("</tr>");
             }
         }
-        sb.append("</span>");
+        sb.append("</table></span>");
         return sb.toString();
     }
 
