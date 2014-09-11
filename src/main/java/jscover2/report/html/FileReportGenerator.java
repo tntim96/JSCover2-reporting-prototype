@@ -84,8 +84,9 @@ public class FileReportGenerator {
             }
             LineCompleteData lineCompleteData = data.getLineData().get(line);
             int lineHits = lineCompleteData.getLineHits();
-            String hitClass = lineCompleteData.hit() ? "hit" : "miss";
-            sb.append(format("<span class=\"line %s\">%d</span>\n", hitClass, lineHits));
+            String hitClass = lineCompleteData.hit() && !lineCompleteData.isBooleanMissed() ? "hit" : "miss";
+            String extraClass = lineCompleteData.isBooleanMissed() ? " booleanMissed" : "";
+            sb.append(format("<span id=\"line%d\" class=\"line %s%s\">%d</span>\n", currentLine, hitClass, extraClass, lineHits));
         }
     }
 
