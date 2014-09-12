@@ -51,6 +51,7 @@ public class SummaryReportGenerator {
         buildMetric(sb, data.getFunctionCoverage());
         buildMetric(sb, data.getLineCoverage());
         sb.append("</tr>\n");
+        sb.append("</table>\n");
         sb.append("</body>\n");
     }
 
