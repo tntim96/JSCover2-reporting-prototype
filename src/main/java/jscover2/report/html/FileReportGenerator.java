@@ -78,6 +78,8 @@ public class FileReportGenerator {
     }
 
     private String getBooleanExpressionHtml(LineCompleteData lineCompleteData) {
+        if (!lineCompleteData.isBooleanMissed())
+            return "";
         StringBuilder sb = new StringBuilder("<span><table>");
         for (BooleanExpressionData booleanExpressionData : lineCompleteData.getBooleanExpressions()) {
             if (!booleanExpressionData.hit()) {
