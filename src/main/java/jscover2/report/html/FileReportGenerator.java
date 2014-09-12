@@ -21,7 +21,8 @@ public class FileReportGenerator {
 
     public String generateHtml() {
         StringBuilder sb = new StringBuilder();
-        sb.append("<html>");
+        sb.append("<!doctype html>\n");
+        sb.append("<html lang=\"en\">\n");
         buildHeader(sb);
         buildBody(sb);
         sb.append("</html>");
