@@ -41,7 +41,7 @@ public class SummaryReportGenerator {
 
     private void buildBody(StringBuilder sb) {
         sb.append("<body>\n");
-        sb.append("<table>\n");
+        sb.append("<table border=\"1\">\n");
         sb.append("<tr><th>Statement</th><th>Branch</th><th>Boolean Expression</th><th>Function</th><th>Line</th></tr>\n");
         sb.append("<tr>\n");
         CoverageSummaryData data = summary.getTotals();
@@ -55,9 +55,9 @@ public class SummaryReportGenerator {
     }
 
     private void buildMetric(StringBuilder sb, CoverageSummaryItem data) {
-        sb.append("<td>");
+        sb.append("<td align=\"right\">");
         sb.append("<span>");
-        sb.append(format("<b>%5.2f%%</b>", data.getRatio() * 100));
+        sb.append(format("<b>%5.2f%%</b>&nbsp;", data.getRatio() * 100));
         sb.append(data.getCovered());
         sb.append("/");
         sb.append(data.getTotal());
