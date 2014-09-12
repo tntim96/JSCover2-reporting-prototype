@@ -82,7 +82,7 @@ public class FileReportGenerator {
         for (BooleanExpressionData booleanExpressionData : lineCompleteData.getBooleanExpressions()) {
             if (!booleanExpressionData.hit()) {
                 String code = sourceCodeRetriever.getSource(booleanExpressionData.getPosition());
-                sb.append("<tr><td>");
+                sb.append("<tr><td class=\"code\">");
                 sb.append(StringEscapeUtils.escapeHtml4(code));
                 sb.append("</td>");
                 sb.append("<td>");

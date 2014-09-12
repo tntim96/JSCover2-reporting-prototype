@@ -12,28 +12,26 @@ body, pre, span {
 .miss {
     background-color: orangered;
 }
+.code {
+    background-color: chocolate;
+}
 span.booleanMissed {
     font-weight: bold;
 }
 span.booleanMissed:hover {
-    text-decoration: none;
     background: red;
-    z-index: 6;
 }
 span.booleanMissed span {
-    position: absolute;
-    left: -9999px;
-    margin: 4px 0 0 0px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ff9933;
+    display: none;
     padding: 3px 3px 3px 3px;
     border: 1px solid black;
     z-index: 6;
 }
 span.booleanMissed:hover span {
-    left: 2%;
-    background: #ffffff;
-}
-span.booleanMissed:hover span {
-    margin: 20px 0 0 170px;
-    background: #ffffff;
-    z-index: 6;
+    display: block;
 }
