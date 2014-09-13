@@ -19,3 +19,10 @@ function check(x) {
     }
     return result
 }
+
+function aORbANDc(a, b, c) {
+    if ((a || b) && c)
+        return true;
+    else;
+    return false;
+}

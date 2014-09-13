@@ -42,10 +42,11 @@ public class FileReportGeneratorTest {
         assertThat(invocable.invokeFunction("check", 1), equalTo("one or two"));
         assertThat(invocable.invokeFunction("check", 2), equalTo("one or two"));
         assertThat(invocable.invokeFunction("check", 4), equalTo("four"));
+        assertThat(invocable.invokeFunction("aORbANDc", false, true, false), equalTo(false));
 
         JSCover2Data jsCover2Data = new JSCover2Data((ScriptObjectMirror) engine.eval(config.getCoverVariableName()));
         FileData fileData = jsCover2Data.getDataMap().get("test.js");
-        assertThat(fileData.getStatements().size(), equalTo(13));
+        assertThat(fileData.getStatements().size(), equalTo(17));
 
         FileReportGenerator fileReportGeneratorReport = new FileReportGenerator("test.js", code, fileData);
         String html = fileReportGeneratorReport.generateHtml();

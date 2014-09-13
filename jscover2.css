@@ -1,26 +1,46 @@
-body, pre, span {
-    font-size: 12pt;
-    font-family: monospace;
+html, body, pre, span {
+    margin: 0;
+    padding: 0;
 }
+
+pre, span {
+    font-size: 12pt;
+    font-family: Amonospace;
+}
+
+table.coverage {
+    margin-left: 5px;
+}
+
+table.coverage td {
+    vertical-align: top;
+}
+
 .line {
-    display:block;
+    display: block;
     text-align: right;
 }
+
 .hit {
     background-color: greenyellow;
 }
+
 .miss {
     background-color: orangered;
 }
-.code {
+
+.code-snippet {
     background-color: chocolate;
 }
+
 span.booleanMissed {
     font-weight: bold;
 }
+
 span.booleanMissed:hover {
     background: red;
 }
+
 span.booleanMissed span {
     position: fixed;
     top: 50%;
@@ -32,6 +52,7 @@ span.booleanMissed span {
     border: 1px solid black;
     z-index: 6;
 }
+
 span.booleanMissed:hover span {
     display: block;
 }

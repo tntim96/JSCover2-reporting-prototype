@@ -38,19 +38,17 @@ public class FileReportGenerator {
 
     private void buildBody(StringBuilder sb) {
         sb.append("<body>\n" +
-                "<table>\n" +
+                "<table class=\"coverage\">\n" +
                 "    <tr>\n" +
-                "        <td><pre>");
+                "        <td class=\"line-number\"><pre>");
         addLines(sb);
         sb.append("</pre></td>\n" +
-                "        <td valign=\"top\">");
+                "        <td class=\"line-coverage\">");
         addHits(sb);
         sb.append("</td>\n" +
-                "        <td>\n" +
-                "<pre>");
+                "        <td class=\"code\"><pre>");
         addSource(sb);
-        sb.append("</pre>\n" +
-                "        </td>\n" +
+        sb.append("</pre></td>\n" +
                 "    </tr>\n" +
                 "</table>\n" +
                 "</body>\n");
@@ -67,7 +65,7 @@ public class FileReportGenerator {
         int currentLine = 0;
         for (Integer line : data.getLineData().keySet()) {
             while (++currentLine < line) {
-                sb.append("<span class=\"line\">&nbsp;</span>\n");
+                sb.append(format("<span id=\"line%d\" class=\"line\">&nbsp;</span>\n", currentLine));
             }
             LineCompleteData lineCompleteData = data.getLineData().get(line);
             int lineHits = lineCompleteData.getLineHits();
@@ -85,7 +83,7 @@ public class FileReportGenerator {
         for (BooleanExpressionData booleanExpressionData : lineCompleteData.getBooleanExpressions()) {
             if (!booleanExpressionData.hit()) {
                 String code = sourceCodeRetriever.getSource(booleanExpressionData.getPosition());
-                sb.append("<tr><td class=\"code\">");
+                sb.append("<tr><td class=\"code-snippet\">");
                 sb.append(StringEscapeUtils.escapeHtml4(code));
                 sb.append("</td>");
                 sb.append("<td>");
