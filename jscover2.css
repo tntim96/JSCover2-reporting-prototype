@@ -1,6 +1,10 @@
-html, body, pre, span {
+html, body, pre, table.coverage td span {
     margin: 0;
     padding: 0;
+}
+
+table.coverage td span.line {
+    color: #666;
 }
 
 pre, span {
@@ -14,6 +18,10 @@ table.coverage {
 
 table.coverage td {
     vertical-align: top;
+}
+
+.line-number {
+    text-align: right;
 }
 
 .line {
@@ -42,6 +50,7 @@ span.booleanMissed:hover {
 }
 
 span.booleanMissed span {
+    color: #000;
     position: fixed;
     top: 50%;
     left: 50%;
