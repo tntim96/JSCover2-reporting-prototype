@@ -3,6 +3,32 @@ html, body, pre, table.coverage td span {
     padding: 0;
 }
 
+table.metric-summary {
+    border: 1px solid #000;
+    border-collapse: collapse;
+    margin-left: 20px;
+    padding-bottom: 50px;
+}
+
+table.metric-summary th {
+    border: 1px solid #000;
+    border-collapse: collapse;
+}
+
+table.metric-summary td {
+    border: 1px solid #000;
+    border-collapse: collapse;
+    text-align: right;
+}
+
+table.metric-summary td span.ratioPercentage {
+    color: #000;
+}
+
+table.metric-summary td span.ratio {
+    color: #666;
+}
+
 table.coverage td.line-coverage span {
     color: #999;
 }

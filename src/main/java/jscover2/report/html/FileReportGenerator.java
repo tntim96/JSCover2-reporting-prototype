@@ -1,9 +1,6 @@
 package jscover2.report.html;
 
-import jscover2.report.BooleanExpressionData;
-import jscover2.report.FileData;
-import jscover2.report.LineCompleteData;
-import jscover2.report.SourceCodeRetriever;
+import jscover2.report.*;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import static java.lang.String.format;
@@ -12,8 +9,10 @@ public class FileReportGenerator {
     private String code;
     private FileData data;
     private final SourceCodeRetriever sourceCodeRetriever;
+    private String fileName;
 
     public FileReportGenerator(String fileName, String code, FileData data) {
+        this.fileName = fileName;
         sourceCodeRetriever = new SourceCodeRetriever(fileName, code);
         this.code = code;
         this.data = data;
@@ -37,8 +36,10 @@ public class FileReportGenerator {
     }
 
     private void buildBody(StringBuilder sb) {
-        sb.append("<body>\n" +
-                "<table class=\"coverage\">\n" +
+        sb.append("<body>\n");
+        CoverageSummaryData summaryData = new CoverageSummaryData(fileName, data);
+        SummaryReportGenerator.buildSummaryMetricTable(sb, summaryData);
+        sb.append("<table class=\"coverage\">\n" +
                 "    <tr>\n" +
                 "        <td class=\"line-number\"><pre>");
         addLines(sb);
