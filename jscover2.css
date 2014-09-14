@@ -4,7 +4,7 @@ html, body, pre, table.coverage td span {
 }
 
 table.coverage td.line-coverage span {
-    color: #888;
+    color: #999;
 }
 
 pre, span {
@@ -13,38 +13,46 @@ pre, span {
 }
 
 table.coverage {
-    margin-left: 5px;
+    margin-left: 15px;
 }
 
 table.coverage td {
     vertical-align: top;
 }
 
-.line-number {
+table.coverage td.line-number {
     text-align: right;
+    padding-right: 5px;
+    border-right: 1px solid #000;
 }
 
 table.coverage td.line-coverage span.line {
     display: block;
     text-align: right;
-    padding: 0 2px 0 3px;
+    padding: 0 2px 0 24px;
+    background: #efefef;
 }
 
-.hit {
-    background-color: #C8E087;
+table.coverage td.code {
+    border-left: 1px solid #000;
 }
 
-.miss {
-    background-color: #E08787;
+table.coverage td.line-coverage span.hit {
+    background-color: #BEFFBA;
 }
 
-span.booleanMissed {
+table.coverage td.line-coverage span.miss {
+    background-color: #FAAFAF;
+}
+
+table.coverage td.line-coverage span.booleanMissed {
     font-weight: bold;
-    border: 1px solid #666;
+    border: 1px solid #999;
 }
 
-span.booleanMissed:hover {
-    background: red;
+table.coverage td.line-coverage span.booleanMissed:hover {
+    color: #000;
+    border-color: #000;
 }
 
 .code-snippet {
