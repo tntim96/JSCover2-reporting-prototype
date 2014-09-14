@@ -3,8 +3,8 @@ html, body, pre, table.coverage td span {
     padding: 0;
 }
 
-table.coverage td span.line {
-    color: #666;
+table.coverage td.line-coverage span {
+    color: #888;
 }
 
 pre, span {
@@ -24,29 +24,31 @@ table.coverage td {
     text-align: right;
 }
 
-.line {
+table.coverage td.line-coverage span.line {
     display: block;
     text-align: right;
+    padding: 0 2px 0 3px;
 }
 
 .hit {
-    background-color: greenyellow;
+    background-color: #C8E087;
 }
 
 .miss {
-    background-color: orangered;
-}
-
-.code-snippet {
-    background-color: chocolate;
+    background-color: #E08787;
 }
 
 span.booleanMissed {
     font-weight: bold;
+    border: 1px solid #666;
 }
 
 span.booleanMissed:hover {
     background: red;
+}
+
+.code-snippet {
+    background-color: #D1F5BA;
 }
 
 span.booleanMissed span {
@@ -55,7 +57,7 @@ span.booleanMissed span {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #ff9933;
+    background: #F5F2AE;
     display: none;
     padding: 3px 3px 3px 3px;
     border: 1px solid black;

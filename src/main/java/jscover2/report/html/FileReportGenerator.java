@@ -65,7 +65,7 @@ public class FileReportGenerator {
         int currentLine = 0;
         for (Integer line : data.getLineData().keySet()) {
             while (++currentLine < line) {
-                sb.append(format("<span id=\"line%d\" class=\"line\">&nbsp;</span>\n", currentLine));
+                sb.append(format("<span class=\"line\">&nbsp;</span>\n", currentLine));
             }
             LineCompleteData lineCompleteData = data.getLineData().get(line);
             int lineHits = lineCompleteData.getLineHits();
