@@ -79,14 +79,14 @@ public class FileReportGenerator {
     private String getBooleanExpressionHtml(LineCompleteData lineCompleteData) {
         if (!lineCompleteData.isBooleanMissed())
             return "";
-        StringBuilder sb = new StringBuilder("<span><table>");
+        StringBuilder sb = new StringBuilder("<span><table class=\"code-snippet\">");
         for (BooleanExpressionData booleanExpressionData : lineCompleteData.getBooleanExpressions()) {
             if (!booleanExpressionData.hit()) {
                 String code = sourceCodeRetriever.getSource(booleanExpressionData.getPosition());
-                sb.append("<tr><td class=\"code-snippet\">");
+                sb.append("<tr><td class=\"snippet\">");
                 sb.append(StringEscapeUtils.escapeHtml4(code));
                 sb.append("</td>");
-                sb.append("<td>");
+                sb.append("<td class=\"description\">");
                 if (booleanExpressionData.getTrueHits() == 0 && booleanExpressionData.getFalseHits() == 0)
                     sb.append("Never evaluated");
                 else if (booleanExpressionData.getTrueHits() == 0)

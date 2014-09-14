@@ -55,8 +55,17 @@ table.coverage td.line-coverage span.booleanMissed:hover {
     border-color: #000;
 }
 
-.code-snippet {
+table.code-snippet td.snippet {
+    color: #033;
     background-color: #D1F5BA;
+    text-align: right;
+    padding: 0 5px 0 2px;
+}
+
+table.code-snippet td.description {
+    color: #222;
+    text-align: left;
+    padding: 0 2px 0 5px;
 }
 
 span.booleanMissed span {
