@@ -24,6 +24,10 @@ table.metric-summary td {
     text-align: right;
 }
 
+table.metric-summary td.name {
+    text-align: left;
+}
+
 table.metric-summary td span.ratioPercentage {
     color: #000;
 }
