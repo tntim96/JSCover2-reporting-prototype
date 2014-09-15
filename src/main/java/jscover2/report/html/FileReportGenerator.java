@@ -70,7 +70,7 @@ public class FileReportGenerator {
             }
             LineCompleteData lineCompleteData = data.getLineData().get(line);
             int lineHits = lineCompleteData.getLineHits();
-            String hitClass = lineCompleteData.hit() && !lineCompleteData.isBooleanMissed() ? "hit" : "miss";
+            String hitClass = lineCompleteData.isLineHit() && !lineCompleteData.isBooleanMissed() ? "hit" : "miss";
             String extraClass = lineCompleteData.isBooleanMissed() ? " booleanMissed" : "";
             String booleanExpressionExplanation = getBooleanExpressionHtml(lineCompleteData);
             sb.append(format("<span id=\"line%d\" class=\"line %s%s\">%d%s</span>\n", currentLine, hitClass, extraClass, lineHits, booleanExpressionExplanation));
