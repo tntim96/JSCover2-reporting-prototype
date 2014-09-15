@@ -34,6 +34,7 @@ table.metric-summary td span.ratio {
 
 table.metric-summary td.graph {
     width: 100px;
+    background-color: #eee;
     text-align: left;
     padding: 0;
     margin: 0;
