@@ -70,7 +70,7 @@ public class SummaryReportGenerator {
         for (CoverageSummaryData summaryData : summary.getFiles()) {
             sb.append("<tr>\n");
             sb.append("<td class=\"name\">");
-            sb.append(format("<a href=\"%s\">%s</a>", summaryData.getName().replaceAll("\\.js", ".html"), summaryData.getName()));
+            sb.append(format("<a href=\"%s.html\">%s</a>", summaryData.getName(), summaryData.getName()));
             sb.append("</td>\n");
             sb.append("<td class=\"graph\">");
             sb.append(format("<div class=\"coveredBackground\"><div class=\"covered\" style=\"width:%3.0fpx;\"></div></div>", summaryData.getLineCoverage().getRatio()*100));
