@@ -46,7 +46,7 @@ public class SummaryReportGenerator {
     }
 
     static void buildSummaryMetricTable(StringBuilder sb, CoverageSummaryData data) {
-        sb.append("Coverage summary for <b>");
+        sb.append("Coverage summary <b>");
         sb.append(data.getName());
         sb.append("</b>\n");
         sb.append("<table class=\"metric-summary\">\n");
