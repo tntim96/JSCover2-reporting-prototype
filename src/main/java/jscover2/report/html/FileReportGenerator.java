@@ -37,6 +37,7 @@ public class FileReportGenerator {
 
     private void buildBody(StringBuilder sb) {
         sb.append("<body>\n");
+        sb.append("<div class=\"content\">\n");
         CoverageSummaryData summaryData = new CoverageSummaryData(fileName, data);
         SummaryReportGenerator.buildSummaryMetricTable(sb, summaryData);
         sb.append("<table class=\"coverage\">\n" +
@@ -52,6 +53,7 @@ public class FileReportGenerator {
         sb.append("</pre></td>\n" +
                 "    </tr>\n" +
                 "</table>\n" +
+                "</div>\n" +
                 "</body>\n");
     }
 

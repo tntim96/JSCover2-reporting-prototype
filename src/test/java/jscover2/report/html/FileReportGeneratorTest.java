@@ -26,13 +26,14 @@ public class FileReportGeneratorTest {
     private Configuration config = new Configuration();
     private Instrumenter instrumenter;
     private String code;
+    private String pathname = "src/test/resources/script.js";
 
     @Before
     public void before() throws Exception {
         config.setCoverVariableName("jscover");
         instrumenter = new Instrumenter(config);
-        code = FileUtils.readFileToString(new File("src/test/resources/script.js"));
-        String instrumented = instrumenter.instrument("test.js", code);
+        code = FileUtils.readFileToString(new File(pathname));
+        String instrumented = instrumenter.instrument(pathname, code);
         engine.eval(instrumented);
     }
 
@@ -45,10 +46,10 @@ public class FileReportGeneratorTest {
         assertThat(invocable.invokeFunction("aORbANDc", false, true, false), equalTo(false));
 
         JSCover2Data jsCover2Data = new JSCover2Data((ScriptObjectMirror) engine.eval(config.getCoverVariableName()));
-        FileData fileData = jsCover2Data.getDataMap().get("test.js");
+        FileData fileData = jsCover2Data.getDataMap().get(pathname);
         assertThat(fileData.getStatements().size(), equalTo(17));
 
-        FileReportGenerator fileReportGeneratorReport = new FileReportGenerator("test.js", code, fileData);
+        FileReportGenerator fileReportGeneratorReport = new FileReportGenerator(pathname, code, fileData);
         String html = fileReportGeneratorReport.generateHtml();
         FileUtils.writeStringToFile(new File("file.html"), html);
     }

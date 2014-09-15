@@ -3,11 +3,14 @@ html, body, pre, table.coverage td span {
     padding: 0;
 }
 
+div.content {
+    margin: 0 0 0 20px;
+}
+
 table.metric-summary {
     border: 1px solid #666;
     border-collapse: collapse;
-    margin-left: 20px;
-    padding-bottom: 50px;
+    margin: 5px 0 5px 0;
 }
 
 table.metric-summary th {
@@ -39,7 +42,7 @@ pre, span {
 }
 
 table.coverage {
-    margin-left: 15px;
+    /*margin-left: 15px;*/
 }
 
 table.coverage td {
