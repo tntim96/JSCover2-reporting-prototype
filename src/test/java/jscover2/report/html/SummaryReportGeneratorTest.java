@@ -41,7 +41,6 @@ public class SummaryReportGeneratorTest {
         invocable.invokeFunction("validCode", "var x = y;");
         invocable.invokeFunction("validCode", "");
         String json = (String) engine.eval("JSON.stringify("+config.getCoverVariableName()+")");
-        System.out.println("json = " + json);
         JSCover2Data jsCover2Data = new JSCover2Data((ScriptObjectMirror) engine.eval(config.getCoverVariableName()));
         SummaryReportGenerator summaryReportGenerator = new SummaryReportGenerator(jsCover2Data, new File("."), new File("target/report"));
         String html = summaryReportGenerator.generateHtml();

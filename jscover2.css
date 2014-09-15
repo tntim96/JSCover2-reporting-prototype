@@ -32,6 +32,28 @@ table.metric-summary td span.ratio {
     color: #666;
 }
 
+table.metric-summary td.graph {
+    width: 100px;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+
+table.metric-summary td.graph div.coveredBackground {
+    width: 100px;
+    background-color: #FAAFAF;
+    height: 15px;
+    padding: 0;
+    margin: 0;
+}
+
+table.metric-summary td.graph div.covered {
+    background-color: #BEFFBA;
+    height: 15px;
+    padding: 0;
+    margin: 0;
+}
+
 table.coverage td.line-coverage span {
     color: #999;
 }

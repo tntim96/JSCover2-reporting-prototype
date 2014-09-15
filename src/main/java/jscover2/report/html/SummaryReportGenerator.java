@@ -41,7 +41,10 @@ public class SummaryReportGenerator {
 
     private void buildBody(StringBuilder sb) {
         sb.append("<body>\n");
+        sb.append("<div class=\"content\">\n");
         buildSummaryMetricTable(sb, summary.getTotals());
+        buildDetailMetricTable(sb, summary);
+        sb.append("</div>\n");
         sb.append("</body>\n");
     }
 
@@ -58,6 +61,27 @@ public class SummaryReportGenerator {
         buildMetric(sb, data.getFunctionCoverage());
         buildMetric(sb, data.getLineCoverage());
         sb.append("</tr>\n");
+        sb.append("</table>\n");
+    }
+
+    private void buildDetailMetricTable(StringBuilder sb, JSCover2CoverageSummary summary) {
+        sb.append("<table class=\"metric-summary\">\n");
+        sb.append("<tr><th colspan=\"2\">Name</th><th>Statement</th><th>Branch</th><th>Boolean Expression</th><th>Function</th><th>Line</th></tr>\n");
+        for (CoverageSummaryData summaryData : summary.getFiles()) {
+            sb.append("<tr>\n");
+            sb.append("<td>");
+            sb.append(summaryData.getName());
+            sb.append("</td>\n");
+            sb.append("<td class=\"graph\">");
+            sb.append(format("<div class=\"coveredBackground\"><div class=\"covered\" style=\"width:%3.0fpx;\"></div></div>", summaryData.getLineCoverage().getRatio()*100));
+            sb.append("</td>\n");
+            buildMetric(sb, summaryData.getStatementCoverage());
+            buildMetric(sb, summaryData.getBranchPathCoverage());
+            buildMetric(sb, summaryData.getBooleanExpressionCoverage());
+            buildMetric(sb, summaryData.getFunctionCoverage());
+            buildMetric(sb, summaryData.getLineCoverage());
+            sb.append("</tr>\n");
+        }
         sb.append("</table>\n");
     }
 
