@@ -10,9 +10,19 @@ public class FileReportGenerator {
     private FileData data;
     private final SourceCodeRetriever sourceCodeRetriever;
     private String fileName;
+    private final String pathToRoot;
+
+    String getPathToRoot(String file) {
+        int count = file.split("/").length - 1;
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < count; i++)
+            sb.append("../");
+        return sb.toString();
+    }
 
     public FileReportGenerator(String fileName, String code, FileData data) {
         this.fileName = fileName;
+        this.pathToRoot = getPathToRoot(fileName);
         sourceCodeRetriever = new SourceCodeRetriever(fileName, code);
         this.code = code;
         this.data = data;
@@ -29,10 +39,10 @@ public class FileReportGenerator {
     }
 
     private void buildHeader(StringBuilder sb) {
-        sb.append("<head>\n" +
-                "    <title>JSCover2 Coverage Report</title>\n" +
-                "    <link rel=\"stylesheet\" href=\"jscover2.css\" type=\"text/css\"/>\n" +
-                "</head>\n");
+        sb.append("<head>\n");
+        sb.append("    <title>JSCover2 Coverage Report</title>\n");
+        sb.append(format("    <link rel=\"stylesheet\" href=\"%sjscover2.css\" type=\"text/css\"/>\n", pathToRoot));
+        sb.append("</head>\n");
     }
 
     private void buildBody(StringBuilder sb) {
