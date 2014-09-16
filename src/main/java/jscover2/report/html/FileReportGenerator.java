@@ -50,6 +50,7 @@ public class FileReportGenerator {
         sb.append("<div class=\"content\">\n");
         CoverageSummaryData summaryData = new CoverageSummaryData(fileName, data);
         SummaryReportGenerator.buildSummaryMetricTable(sb, summaryData);
+        sb.append(format("<a href=\"%sindex.html\">Back to summary</a>\n", pathToRoot));
         sb.append("<table class=\"coverage\">\n" +
                 "    <tr>\n" +
                 "        <td class=\"line-number\"><pre>");

@@ -50,6 +50,7 @@ public class SummaryReportGeneratorTest {
     public void shouldGenerateReport() throws ScriptException, NoSuchMethodException, IOException {
         invocable.invokeFunction("validCode", "var x = y;");
         invocable.invokeFunction("validCode", "");
+        invocable.invokeFunction("fib", 3);
         JSCover2Data jsCover2Data = new JSCover2Data((ScriptObjectMirror) engine.eval(config.getCoverVariableName()));
         SummaryReportGenerator summaryReportGenerator = new SummaryReportGenerator(jsCover2Data, new File("."), new File("target/report"));
         summaryReportGenerator.generateReport();
