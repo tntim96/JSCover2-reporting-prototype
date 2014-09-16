@@ -37,14 +37,22 @@ public class SummaryReportGeneratorTest {
     }
 
     @Test
-    public void shouldGenerateHtml() throws ScriptException, NoSuchMethodException, IOException {
+    public void shouldGenerateIndexHtml() throws ScriptException, NoSuchMethodException, IOException {
         invocable.invokeFunction("validCode", "var x = y;");
         invocable.invokeFunction("validCode", "");
-        String json = (String) engine.eval("JSON.stringify("+config.getCoverVariableName()+")");
         JSCover2Data jsCover2Data = new JSCover2Data((ScriptObjectMirror) engine.eval(config.getCoverVariableName()));
         SummaryReportGenerator summaryReportGenerator = new SummaryReportGenerator(jsCover2Data, new File("."), new File("target/report"));
-        String html = summaryReportGenerator.generateHtml();
+        String html = summaryReportGenerator.generateIndexHtml();
         FileUtils.writeStringToFile(new File("index.html"), html);
+    }
+
+    @Test
+    public void shouldGenerateReport() throws ScriptException, NoSuchMethodException, IOException {
+        invocable.invokeFunction("validCode", "var x = y;");
+        invocable.invokeFunction("validCode", "");
+        JSCover2Data jsCover2Data = new JSCover2Data((ScriptObjectMirror) engine.eval(config.getCoverVariableName()));
+        SummaryReportGenerator summaryReportGenerator = new SummaryReportGenerator(jsCover2Data, new File("."), new File("target/report"));
+        summaryReportGenerator.generateReport();
     }
 
 }

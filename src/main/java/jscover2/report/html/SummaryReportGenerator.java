@@ -1,11 +1,10 @@
 package jscover2.report.html;
 
-import jscover2.report.CoverageSummaryData;
-import jscover2.report.CoverageSummaryItem;
-import jscover2.report.JSCover2CoverageSummary;
-import jscover2.report.JSCover2Data;
+import jscover2.report.*;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
 
 import static java.lang.String.format;
 
@@ -22,7 +21,32 @@ public class SummaryReportGenerator {
         summary = new JSCover2CoverageSummary(jsCover2Data);
     }
 
-    public String generateHtml() {
+    public void generateReport() {
+        try {
+            File cssFile = new File(reportDir, "jscover2.css");
+            FileUtils.copyInputStreamToFile(getClass().getResourceAsStream("/jscover2.css"), cssFile);
+            FileUtils.write(new File(reportDir, "index.html"), generateIndexHtml());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        generateFiles();
+    }
+
+    void generateFiles() {
+        for (String fileName : jsCover2Data.getDataMap().keySet()) {
+            try {
+                String code = FileUtils.readFileToString(new File(sourceRoot, fileName));
+                FileData fileData = jsCover2Data.getDataMap().get(fileName);
+                FileReportGenerator frg = new FileReportGenerator(fileName, code, fileData);
+                File dest = new File(reportDir, fileName + ".html");
+                FileUtils.writeStringToFile(dest, frg.generateHtml());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    String generateIndexHtml() {
         StringBuilder sb = new StringBuilder();
         sb.append("<!doctype html>\n");
         sb.append("<html lang=\"en\">\n");
