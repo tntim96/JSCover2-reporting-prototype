@@ -5,6 +5,9 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import static java.lang.String.format;
 
@@ -13,6 +16,7 @@ public class SummaryReportGenerator {
     private File sourceRoot;
     private File reportDir;
     private JSCover2CoverageSummary summary;
+    private CoverageSummaryDataSorter sorter = new CoverageSummaryDataSorter();
 
     public SummaryReportGenerator(JSCover2Data jsCover2Data, File sourceRoot, File reportDir) {
         this.jsCover2Data = jsCover2Data;
@@ -25,7 +29,20 @@ public class SummaryReportGenerator {
         try {
             File cssFile = new File(reportDir, "jscover2.css");
             FileUtils.copyInputStreamToFile(getClass().getResourceAsStream("/jscover2.css"), cssFile);
-            FileUtils.write(new File(reportDir, "index.html"), generateIndexHtml());
+            FileUtils.write(new File(reportDir, "index.html"), generateIndexHtml(sorter.byStatementCoverageAsc()));
+/*
+            FileUtils.write(new File(reportDir, "index-sd.html"), generateIndexHtml(sorter.byStatementCoverageDesc()));
+            FileUtils.write(new File(reportDir, "index-na.html"), generateIndexHtml(sorter.byNameAsc()));
+            FileUtils.write(new File(reportDir, "index-nd.html"), generateIndexHtml(sorter.byNameDesc()));
+            FileUtils.write(new File(reportDir, "index-bea.html"), generateIndexHtml(sorter.byBooleanExpressionCoverageAsc()));
+            FileUtils.write(new File(reportDir, "index-bed.html"), generateIndexHtml(sorter.byBooleanExpressionCoverageDesc()));
+            FileUtils.write(new File(reportDir, "index-ba.html"), generateIndexHtml(sorter.byBranchCoverageAsc()));
+            FileUtils.write(new File(reportDir, "index-bd.html"), generateIndexHtml(sorter.byBranchCoverageDesc()));
+            FileUtils.write(new File(reportDir, "index-fa.html"), generateIndexHtml(sorter.byFunctionCoverageAsc()));
+            FileUtils.write(new File(reportDir, "index-fd.html"), generateIndexHtml(sorter.byFunctionCoverageDesc()));
+            FileUtils.write(new File(reportDir, "index-la.html"), generateIndexHtml(sorter.byLineCoverageAsc()));
+            FileUtils.write(new File(reportDir, "index-ld.html"), generateIndexHtml(sorter.byLineCoverageDesc()));
+*/
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -46,12 +63,12 @@ public class SummaryReportGenerator {
         }
     }
 
-    String generateIndexHtml() {
+    String generateIndexHtml(Comparator<jscover2.report.CoverageSummaryData> comparator) {
         StringBuilder sb = new StringBuilder();
         sb.append("<!doctype html>\n");
         sb.append("<html lang=\"en\">\n");
         buildHeader(sb);
-        buildBody(sb);
+        buildBody(sb, comparator);
         sb.append("</html>");
         return sb.toString();
     }
@@ -63,11 +80,13 @@ public class SummaryReportGenerator {
                 "</head>\n");
     }
 
-    private void buildBody(StringBuilder sb) {
+    private void buildBody(StringBuilder sb, Comparator<CoverageSummaryData> comparator) {
         sb.append("<body>\n");
-        sb.append("<div class=\"content\">\n");
+        sb.append("<div class=\"header\">\n");
         buildSummaryMetricTable(sb, summary.getTotals());
-        buildDetailMetricTable(sb, summary);
+        sb.append("</div>\n");
+        sb.append("<div class=\"content\">\n");
+        buildDetailMetricTable(sb, summary, comparator);
         sb.append("</div>\n");
         sb.append("</body>\n");
     }
@@ -88,10 +107,19 @@ public class SummaryReportGenerator {
         sb.append("</table>\n");
     }
 
-    private void buildDetailMetricTable(StringBuilder sb, JSCover2CoverageSummary summary) {
+    private void buildDetailMetricTable(StringBuilder sb, JSCover2CoverageSummary summary, Comparator<CoverageSummaryData> comparator) {
         sb.append("<table class=\"metric-summary\">\n");
-        sb.append("<tr><th colspan=\"2\">Name</th><th>Statement</th><th>Branch</th><th>Boolean Expression</th><th>Function</th><th>Line</th></tr>\n");
-        for (CoverageSummaryData summaryData : summary.getFiles()) {
+        sb.append("<tr>\n");
+        sb.append("<th colspan=\"2\">Name</th>\n");
+        sb.append("<th>Statement</th>\n");
+        sb.append("<th>Branch</th>\n");
+        sb.append("<th>Boolean Expression</th>\n");
+        sb.append("<th>Function</th>\n");
+        sb.append("<th>Line</th>\n");
+        sb.append("</tr>\n");
+        List<CoverageSummaryData> files = summary.getFiles();
+        Collections.sort(files, comparator);
+        for (CoverageSummaryData summaryData : files) {
             sb.append("<tr>\n");
             sb.append("<td class=\"name\">");
             sb.append(format("<a href=\"%s.html\">%s</a>", summaryData.getName(), summaryData.getName()));

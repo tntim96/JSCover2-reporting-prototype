@@ -3,6 +3,7 @@ package jscover2.report.html;
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import jscover2.instrument.Configuration;
 import jscover2.instrument.Instrumenter;
+import jscover2.report.CoverageSummaryDataSorter;
 import jscover2.report.JSCover2Data;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
@@ -20,6 +21,7 @@ public class SummaryReportGeneratorTest {
     private Invocable invocable = (Invocable) engine;
     private Configuration config = new Configuration();
     private Instrumenter instrumenter;
+    private CoverageSummaryDataSorter sorter = new CoverageSummaryDataSorter();
 
     @Before
     public void before() throws Exception {
@@ -42,7 +44,7 @@ public class SummaryReportGeneratorTest {
         invocable.invokeFunction("validCode", "");
         JSCover2Data jsCover2Data = new JSCover2Data((ScriptObjectMirror) engine.eval(config.getCoverVariableName()));
         SummaryReportGenerator summaryReportGenerator = new SummaryReportGenerator(jsCover2Data, new File("."), new File("target/report"));
-        String html = summaryReportGenerator.generateIndexHtml();
+        String html = summaryReportGenerator.generateIndexHtml(sorter.byStatementCoverageDesc());
         FileUtils.writeStringToFile(new File("index.html"), html);
     }
 
